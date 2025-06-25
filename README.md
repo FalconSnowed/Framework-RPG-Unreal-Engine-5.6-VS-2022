@@ -1,58 +1,90 @@
-# 🧙‍♂️ MyRPG — Modular C++ RPG Framework (Unreal Engine 5.6)
+# MyRPG - Modular RPG Framework (UE 5.6)
 
-Bienvenue dans **MyRPG**, un framework RPG solo construit en C++ pour Unreal Engine 5.6, entièrement modulaire, extensible et propulsé par des composants Unreal (Inventory, Stats, Save, UI...).
-
----
-
-## 📦 Features
-
-### ✅ Core Components
-- `UStatComponent` — Gère la vie, mana, attaque, défense et niveau.
-- `UInventoryComponent` — Ajout, suppression et gestion des objets.
-- `UEquipmentComponent` — Système d’équipement avec slots (`Head`, `Chest`, `Weapon`, etc.)
-- `URPGSaveGame` — Sauvegarde persistante des statistiques et de l’inventaire.
-
-### 🧙‍♀️ ARPGCharacter
-- Contient les composants `InventoryComponent` et `StatComponent`.
-- Peut sauvegarder et charger l’état du joueur avec `SavePlayerData()` et `LoadPlayerData()`.
-
-### 🎒 Inventory System
-- Struct `FInventoryItem` pour les objets.
-- Widget `UInventorySlotWidget` (UMG + C++) avec **glisser-déposer intégré**.
-- Support visuel avec icône, quantité, et opérations de drag & drop.
-- Fonction `SwapItems()` à intégrer pour échanger dynamiquement deux objets.
-
-### 💾 Sauvegarde & Chargement
-- Sauvegarde automatique dans `PlayerSaveSlot`.
-- Persistance de la santé, mana et inventaire.
-
-### 🖱️ GUI Drag & Drop
-- Widget `InventorySlotWidget` :
-  - `UImage* ItemImage`
-  - `UTextBlock* QuantityText`
-  - Support `DragDropOperation` natif
-- Système extensible pour l’intégration d’un `InventoryGridWidget` ou `EquipmentWidget`.
+A modular RPG framework for Unreal Engine 5.6, designed for solo devs who love clean architecture, rich features, and extensibility.
 
 ---
 
-## 🧩 Structs
+## 🔧 Core Modules
 
-- `FInventoryItem` : Nom + quantité
-- `FEquippedItem` : Slot + nom de l’objet équipé
+### 📦 `InventoryComponent`
+
+Manage all inventory items, quantities, and slots.
+
+### 📦 `EquipmentComponent`
+
+Handles equipment logic for weapons, armor, and more. Compatible with `EquippedItemStruct`.
+
+### 📦 `StatComponent`
+
+Stores and modifies player stats like HP, defense, etc. Used by combat and gameplay logic.
+
+### 📦 `QuestComponent`
+
+Quest tracking and completion logic, including current objectives and rewards.
+
+### 📦 `DialogueComponent`
+
+Simple dialogue branching system with support for NPC integration.
+
+### 📦 `AbilityComponent`
+
+Manages active and passive abilities, cooldowns, and usage logic.
+
+### 📦 `CombatComponent` ✅ NEW!
+
+* Handles melee attacks
+* Supports hit detection in area
+* Applies damage via `StatComponent`
+* Triggers VFX (particle system)
+* Handles critical hit logic
 
 ---
 
-## 🧠 Extension Suggestions
+## 📁 Structs
 
-- 🔄 Ajoute `SwapItems()` dans `UInventoryComponent` pour gérer les échanges entre slots.
-- 🎨 Intègre des icônes personnalisées via `UTexture2D*` dans chaque `FInventoryItem`.
-- 📱 Ajoute un `UInventoryGridWidget` pour la vue globale avec un `UniformGridPanel`.
-- ⚔️ Intègre les statistiques des objets équipés dans `UStatComponent`.
+* `InventoryItemStruct` — Basic info for inventory items.
+* `EquippedItemStruct` — Used to define stats and effects of equipped items.
 
 ---
 
-## 🛠️ Build Instructions
+## 🎮 Main Character Class
 
-1. **Cloner le projet :**
-   ```bash
-   git clone https://github.com/votreuser/MyRPG.git
+`ARPGCharacter` includes:
+
+* `InventoryComponent`
+* `EquipmentComponent`
+* `StatComponent`
+* `CombatComponent`
+
+---
+
+## 🛠 Setup
+
+1. Clone the repo
+2. Generate Visual Studio project files
+3. Open `.uproject` in Unreal Engine 5.6
+4. Compile
+5. 🎮 Play and test
+
+---
+
+## 📌 Notes
+
+* Fully modular.
+* BlueprintCallable for easy design use.
+* Optimized for solo and small team projects.
+
+---
+
+## 📚 Future Modules
+
+* 🎯 AIComponent (EnemyAI)
+* 💬 Dialogue UI Widget
+* 🌟 Leveling System
+* 🧠 Behavior Tree integration
+
+---
+
+Made with ❤️ by Maëlik aka Light
+
+---
