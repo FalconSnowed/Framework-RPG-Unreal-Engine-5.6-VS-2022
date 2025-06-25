@@ -4,4 +4,5 @@ URPGSaveGame::URPGSaveGame()
 {
     SavedHealth = 100.f;
     SavedMana = 50.f;
+    SavedInventory = {};
 }

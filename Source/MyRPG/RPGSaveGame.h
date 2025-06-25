@@ -2,9 +2,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
-#include "InventoryItemStruct.h" // ✅ on inclut ici ta struct
+#include "InventoryItemStruct.h" // ✅ struct FInventoryItem
 
-#include "RPGSaveGame.generated.h"
+#include "RPGSaveGame.generated.h" // ⚠️ TOUJOURS EN DERNIER
 
 UCLASS()
 class MYRPG_API URPGSaveGame : public USaveGame
@@ -14,12 +14,12 @@ class MYRPG_API URPGSaveGame : public USaveGame
 public:
     URPGSaveGame();
 
-    UPROPERTY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float SavedHealth;
 
-    UPROPERTY()
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float SavedMana;
 
-    UPROPERTY()
-    TArray<FInventoryItem> SavedInventory; // ✅ on utilise bien FInventoryItem
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    TArray<FInventoryItem> SavedInventory;
 };
