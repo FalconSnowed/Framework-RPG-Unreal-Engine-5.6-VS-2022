@@ -6,7 +6,9 @@ ARPGCharacter::ARPGCharacter()
 {
     InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
     StatComponent = CreateDefaultSubobject<UStatComponent>(TEXT("StatComponent"));
+    CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
 }
+
 
 void ARPGCharacter::SavePlayerData()
 {

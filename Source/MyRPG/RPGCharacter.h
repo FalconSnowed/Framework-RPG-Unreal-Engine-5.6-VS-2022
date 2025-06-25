@@ -1,10 +1,12 @@
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InventoryComponent.h"
 #include "StatComponent.h"
-#include "RPGCharacter.generated.h"
+#include "CombatComponent.h" // Tous les includes avant...
+
+#include "RPGCharacter.generated.h" // ⚠️ DOIT être le dernier include
 
 UCLASS()
 class MYRPG_API ARPGCharacter : public ACharacter
@@ -19,6 +21,9 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
     UStatComponent* StatComponent;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+    UCombatComponent* CombatComponent;
 
     UFUNCTION(BlueprintCallable)
     void SavePlayerData();
