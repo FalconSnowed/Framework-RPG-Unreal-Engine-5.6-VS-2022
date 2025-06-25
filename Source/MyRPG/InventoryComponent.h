@@ -5,6 +5,9 @@
 #include "InventoryItemStruct.h"
 #include "InventoryComponent.generated.h"
 
+// 👇 Forward declaration pour éviter les inclusions croisées
+class UEquipmentComponent;
+
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MYRPG_API UInventoryComponent : public UActorComponent
 {
@@ -13,11 +16,25 @@ class MYRPG_API UInventoryComponent : public UActorComponent
 public:
     UInventoryComponent();
 
-    // Tableau contenant les objets de l’inventaire
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
     TArray<FInventoryItem> Items;
 
-    // Ajout d’un objet
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     void AddItem(const FString& ItemName, int32 Quantity);
+
+    UFUNCTION(BlueprintCallable, Category = "Equipment")
+    void EquipItem(const FString& Slot, const FString& ItemName);
+
+    UFUNCTION(BlueprintCallable, Category = "Equipment")
+    void UnequipItem(const FString& Slot);
+
+    UFUNCTION(BlueprintCallable, Category = "Equipment")
+    FString GetEquippedItem(const FString& Slot) const;
+
+protected:
+    virtual void BeginPlay() override;
+
+private:
+    UPROPERTY()
+    UEquipmentComponent* EquipmentComponent;
 };

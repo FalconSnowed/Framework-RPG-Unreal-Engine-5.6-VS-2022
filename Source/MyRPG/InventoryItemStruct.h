@@ -1,19 +1,28 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "InventoryItemStruct.generated.h" // ✅ DOIT être le dernier include
+#include "InventoryItemStruct.generated.h"
 
 USTRUCT(BlueprintType)
-struct FInventoryItem
+struct MYRPG_API FInventoryItem
 {
     GENERATED_BODY()
 
-    UPROPERTY(BlueprintReadWrite)
-    FString Name;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+    FString ItemName;
 
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
     int32 Quantity;
 
-    FInventoryItem() : Name(TEXT("")), Quantity(0) {}
-    FInventoryItem(const FString& InName, int32 InQuantity) : Name(InName), Quantity(InQuantity) {}
+    // Constructeur par défaut
+    FInventoryItem()
+        : ItemName(TEXT("")), Quantity(0)
+    {
+    }
+
+    // Constructeur personnalisé
+    FInventoryItem(const FString& InName, int32 InQuantity)
+        : ItemName(InName), Quantity(InQuantity)
+    {
+    }
 };
