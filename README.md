@@ -4,6 +4,7 @@ A modular, C++-based RPG framework built in **Unreal Engine 5.6**, designed to b
 This project is ideal for solo devs or small teams looking to bootstrap an RPG with save/load, inventory, stats, and character systems.
 
 ---
+![image](https://github.com/user-attachments/assets/41ba1de3-5b82-4e06-bddb-310318cafe15)
 
 ## 🔧 Features
 
