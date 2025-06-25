@@ -1,51 +1,58 @@
-# 🎮 MyRPG Framework (WIP) – Unreal Engine 5.6
+# 🧙‍♂️ MyRPG — Modular C++ RPG Framework (Unreal Engine 5.6)
 
-A modular, C++-based RPG framework built in **Unreal Engine 5.6**, designed to be lightweight, extensible, and beginner-friendly.  
-This project is ideal for solo devs or small teams looking to bootstrap an RPG with save/load, inventory, stats, and character systems.
-
----
-![image](https://github.com/user-attachments/assets/41ba1de3-5b82-4e06-bddb-310318cafe15)
-
-## 🔧 Features
-
-### ✅ Core Systems Implemented
-- `ARPGCharacter` with component-driven architecture
-- `UInventoryComponent` to manage a dynamic item list
-- `UStatComponent` to track current health and mana
-- `URPGSaveGame` system to persist player data (stats + inventory)
-- `FInventoryItem` struct with name and quantity
-
-### 💾 Save/Load System
-- Uses `UGameplayStatics::SaveGameToSlot` and `LoadGameFromSlot`
-- Saves:
-  - Player health
-  - Player mana
-  - Full inventory
-- Can be extended to include equipment, XP, quests, etc.
+Bienvenue dans **MyRPG**, un framework RPG solo construit en C++ pour Unreal Engine 5.6, entièrement modulaire, extensible et propulsé par des composants Unreal (Inventory, Stats, Save, UI...).
 
 ---
 
-## 🧱 Code Architecture
+## 📦 Features
 
-### ARPGCharacter.cpp
-- Creates `InventoryComponent` and `StatComponent`
-- Provides two main functions:
-  - `SavePlayerData()` – saves stats and inventory
-  - `LoadPlayerData()` – loads saved state into components
+### ✅ Core Components
+- `UStatComponent` — Gère la vie, mana, attaque, défense et niveau.
+- `UInventoryComponent` — Ajout, suppression et gestion des objets.
+- `UEquipmentComponent` — Système d’équipement avec slots (`Head`, `Chest`, `Weapon`, etc.)
+- `URPGSaveGame` — Sauvegarde persistante des statistiques et de l’inventaire.
 
-### FInventoryItem (struct)
-```cpp
-USTRUCT(BlueprintType)
-struct FInventoryItem
-{
-    GENERATED_BODY();
+### 🧙‍♀️ ARPGCharacter
+- Contient les composants `InventoryComponent` et `StatComponent`.
+- Peut sauvegarder et charger l’état du joueur avec `SavePlayerData()` et `LoadPlayerData()`.
 
-    UPROPERTY(BlueprintReadWrite)
-    FString Name;
+### 🎒 Inventory System
+- Struct `FInventoryItem` pour les objets.
+- Widget `UInventorySlotWidget` (UMG + C++) avec **glisser-déposer intégré**.
+- Support visuel avec icône, quantité, et opérations de drag & drop.
+- Fonction `SwapItems()` à intégrer pour échanger dynamiquement deux objets.
 
-    UPROPERTY(BlueprintReadWrite)
-    int32 Quantity;
+### 💾 Sauvegarde & Chargement
+- Sauvegarde automatique dans `PlayerSaveSlot`.
+- Persistance de la santé, mana et inventaire.
 
-    FInventoryItem() : Name(TEXT("")), Quantity(0) {}
-    FInventoryItem(const FString& InName, int32 InQuantity) : Name(InName), Quantity(InQuantity) {}
-};
+### 🖱️ GUI Drag & Drop
+- Widget `InventorySlotWidget` :
+  - `UImage* ItemImage`
+  - `UTextBlock* QuantityText`
+  - Support `DragDropOperation` natif
+- Système extensible pour l’intégration d’un `InventoryGridWidget` ou `EquipmentWidget`.
+
+---
+
+## 🧩 Structs
+
+- `FInventoryItem` : Nom + quantité
+- `FEquippedItem` : Slot + nom de l’objet équipé
+
+---
+
+## 🧠 Extension Suggestions
+
+- 🔄 Ajoute `SwapItems()` dans `UInventoryComponent` pour gérer les échanges entre slots.
+- 🎨 Intègre des icônes personnalisées via `UTexture2D*` dans chaque `FInventoryItem`.
+- 📱 Ajoute un `UInventoryGridWidget` pour la vue globale avec un `UniformGridPanel`.
+- ⚔️ Intègre les statistiques des objets équipés dans `UStatComponent`.
+
+---
+
+## 🛠️ Build Instructions
+
+1. **Cloner le projet :**
+   ```bash
+   git clone https://github.com/votreuser/MyRPG.git
