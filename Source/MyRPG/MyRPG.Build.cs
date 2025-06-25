@@ -13,7 +13,7 @@ public class MyRPG : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
         PrivateDependencyModuleNames.AddRange(new string[] {
-    "RenderCore", "RHI", "ShaderCore"
+    "RenderCore", "RHI"
 });
 
         PublicDefinitions.Add("ALLOW_CUSTOM_SHADER_COMPILATION=1");

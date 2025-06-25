@@ -4,7 +4,6 @@
 
 ARPGCharacter::ARPGCharacter()
 {
-    // Ne PAS redéclarer les composants → utiliser les membres de classe
     InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
     StatComponent = CreateDefaultSubobject<UStatComponent>(TEXT("StatComponent"));
 }
@@ -19,8 +18,9 @@ void ARPGCharacter::SavePlayerData()
         return;
     }
 
-    SaveGameInstance->SavedHealth = StatComponent->CurrentHealth;
-    SaveGameInstance->SavedMana = StatComponent->CurrentMana;
+    // ✅ Utilisation des getters
+    SaveGameInstance->SavedHealth = StatComponent->GetHealth();
+    SaveGameInstance->SavedMana = StatComponent->GetMana();
 
     SaveGameInstance->SavedInventory.Empty();
     for (const FInventoryItem& Item : InventoryComponent->Items)
@@ -44,8 +44,9 @@ void ARPGCharacter::LoadPlayerData()
         URPGSaveGame* LoadedGame = Cast<URPGSaveGame>(UGameplayStatics::LoadGameFromSlot(TEXT("PlayerSaveSlot"), 0));
         if (LoadedGame)
         {
-            StatComponent->CurrentHealth = LoadedGame->SavedHealth;
-            StatComponent->CurrentMana = LoadedGame->SavedMana;
+            // ✅ Utilisation des setters
+            StatComponent->SetHealth(LoadedGame->SavedHealth);
+            StatComponent->SetMana(LoadedGame->SavedMana);
 
             InventoryComponent->Items.Empty();
             for (const FInventoryItem& Saved : LoadedGame->SavedInventory)
